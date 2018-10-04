@@ -103,6 +103,7 @@ class SimpleShadersDlg(QtGui.QWidget):
         imageField = fieldmodule.createFieldImage()
         imageField.readFile("models/background.jpg")
         imageField.setTextureCoordinateSizes([1.0, 1.0, 1.0])
+        imageField.setWrapMode(imageField.WRAP_MODE_MIRROR_REPEAT)
         coordinates = fieldmodule.findFieldByName("coordinates")
         xi = fieldmodule.findFieldByName("xi")
         # Call beginChange() to stop scene change messages being sent while
