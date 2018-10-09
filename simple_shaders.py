@@ -71,7 +71,7 @@ class SimpleShadersDlg(QtGui.QWidget):
             
     def updateUniforms(self):
         elapsed = time.time() - self._start
-        self._shaderuniforms.setUniformDouble("time", [elapsed])
+        self._shaderuniforms.setUniformReal("time", [elapsed])
         
     def readMesh(self):
     	self._defaultRegion.readFile("models/cheese.exnode")
@@ -82,13 +82,13 @@ class SimpleShadersDlg(QtGui.QWidget):
         fs = open("shader.fs", "r")
         shadermodule = self._context.getShadermodule()
         shaderprogram = shadermodule.createShaderprogram()
-        shaderprogram.setVertexString(vs.read())
-        shaderprogram.setFragmentString(fs.read())
+        shaderprogram.setVertexShader(vs.read())
+        shaderprogram.setFragmentShader(fs.read())
         vs.close()
         fs.close()
         self._shaderuniforms = shadermodule.createShaderuniforms()
-        self._shaderuniforms.addUniformDouble("time", [0.0])
-        self._shaderuniforms.addUniformInteger("shadingMode", [0])
+        self._shaderuniforms.addUniformReal("time", [0.0])
+        self._shaderuniforms.addUniformInteger("shadingMode", [2])
         self.updateUniforms()
         material.setShaderuniforms(self._shaderuniforms)
         material.setShaderprogram(shaderprogram)
